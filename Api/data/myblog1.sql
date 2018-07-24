@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.5.53)
-# Date: 2018-07-24 11:07:56
+# Date: 2018-07-25 00:16:12
 # Generator: MySQL-Front 5.3  (Build 4.234)
 
 /*!40101 SET NAMES utf8 */;
@@ -240,12 +240,13 @@ CREATE TABLE `blog_admin_user_action` (
   `data` text COMMENT '用户提交的数据',
   `url` varchar(200) NOT NULL DEFAULT '' COMMENT '操作URL',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户操作日志';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COMMENT='用户操作日志';
 
 #
 # Data for table "blog_admin_user_action"
 #
 
+INSERT INTO `blog_admin_user_action` VALUES (1,'菜单列表',1,'root',1532366802,'[]','admin/Menu/index'),(2,'用户列表',1,'root',1532366805,'{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}','admin/User/index'),(3,'菜单列表',1,'root',1532366806,'[]','admin/Menu/index'),(4,'用户列表',1,'root',1532366808,'{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}','admin/User/index'),(5,'权限列表',1,'root',1532366811,'{\"page\":\"1\",\"size\":\"10\",\"keywords\":\"\",\"status\":\"\"}','admin/Auth/index'),(6,'获取操作日志列表',1,'root',1532366812,'{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\"}','admin/Log/index'),(7,'应用分组列表',1,'root',1532366816,'{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}','admin/AppGroup/index'),(8,'应用列表',1,'root',1532366817,'{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}','admin/App/index'),(9,'接口分组列表',1,'root',1532366820,'{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}','admin/InterfaceGroup/index'),(10,'接口列表',1,'root',1532366821,'{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}','admin/InterfaceList/index'),(11,'获取全部有效的接口组',1,'root',1532366821,'[]','admin/InterfaceGroup/getAll'),(12,'获取全部有效的接口组',1,'root',1532366823,'[]','admin/InterfaceGroup/getAll'),(13,'获取接口唯一标识',1,'root',1532366826,'[]','admin/InterfaceList/getHash'),(14,'菜单列表',1,'root',1532366842,'[]','admin/Menu/index'),(15,'应用分组列表',1,'root',1532366845,'{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}','admin/AppGroup/index'),(16,'应用列表',1,'root',1532366846,'{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}','admin/App/index'),(17,'菜单列表',1,'root',1532366847,'[]','admin/Menu/index'),(18,'用户列表',1,'root',1532366857,'{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}','admin/User/index'),(19,'权限列表',1,'root',1532366859,'{\"page\":\"1\",\"size\":\"10\",\"keywords\":\"\",\"status\":\"\"}','admin/Auth/index'),(20,'获取操作日志列表',1,'root',1532366860,'{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\"}','admin/Log/index'),(21,'获取全部可用应用组',1,'root',1532366864,'[]','admin/AppGroup/getAll'),(22,'获取AppId,AppSecret,接口列表,应用接口权限细节',1,'root',1532366864,'[]','admin/App/getAppInfo'),(23,'获取接口唯一标识',1,'root',1532366870,'[]','admin/InterfaceList/getHash'),(24,'获取当前组的全部用户',1,'root',1532446718,'{\"token\":\"e364b35c5d81de8f8da62e5b21fd1adc\"}','admin/User/getUsers'),(25,'获取当前组的全部用户',1,'root',1532446730,'[]','admin/User/getUsers');
 
 #
 # Structure for table "blog_admin_user_data"
@@ -266,4 +267,4 @@ CREATE TABLE `blog_admin_user_data` (
 # Data for table "blog_admin_user_data"
 #
 
-INSERT INTO `blog_admin_user_data` VALUES (1,0,0,0,'1','');
+INSERT INTO `blog_admin_user_data` VALUES (1,49,2130706433,1532446496,'1','https://apic.douyucdn.cn/upload/avatar/006/29/44/20_avatar_middle.jpg');
