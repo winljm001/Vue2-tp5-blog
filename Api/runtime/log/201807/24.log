@@ -5018,3 +5018,160 @@
 [ sql ] [ SQL ] SHOW COLUMNS FROM `blog_admin_user_action` [ RunTime:0.005000s ]
 [ sql ] [ SQL ] INSERT INTO `blog_admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单列表' , 1 , 'root' , 1532403879 , 'admin/Menu/index' , '{\"ApiAuth\":\"8d6b079ca7a4f0f4bf10f19c513577a2\"}') [ RunTime:0.002000s ]
 [ sql ] [ SQL ] SELECT * FROM `blog_admin_menu` ORDER BY `sort` ASC [ RunTime:0.004001s ]
+---------------------------------------------------------------
+[ 2018-07-24T14:12:54+08:00 ] 127.0.0.1 POST /blog/Api/public/index.php/admin/Login/index
+[ info ] localhost/blog/Api/public/index.php/admin/Login/index [运行时间：0.061003s][吞吐率：16.39req/s] [内存消耗：2,677.81kb] [文件加载：50]
+[ info ] [ LANG ] D:\phpstudy\PHPTutorial\WWW\blog\Api\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Login',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '39',
+  'connection' => 'close',
+  'cookie' => 'pgv_pvi=7650984960; bdshare_firstime=1510890686677; uid_cv_k_u_s=1VpwNozfAxsxlnT18839||||; Hm_lvt_fd74e8f9ce0ff4bad5a83064a8fc4006=1532341419; UM_distinctid=164c6aac613438-0128cd16f11e3b8-43574130-13c680-164c6aac6143; CNZZDATA1274061701=1320325861-1532336632-%7C1532336632; _ga=GA1.1.2105744487.1532341438; _gid=GA1.1.1677497449.1532341438',
+  'referer' => 'http://localhost:8081/',
+  'content-type' => 'application/json;charset=utf-8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept' => 'application/json, text/plain, */*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0',
+  'host' => 'localhost',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'root',
+  'password' => '123456',
+)
+[ info ] [ RUN ] app\admin\controller\Login->index[ D:\phpstudy\PHPTutorial\WWW\blog\Api\application\admin\controller\Login.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+[ error ] [1049]SQLSTATE[HY000] [1049] Unknown database 'myblog'[D:\phpstudy\PHPTutorial\WWW\blog\Api\thinkphp\library\think\db\Connection.php:295]
+---------------------------------------------------------------
+[ 2018-07-24T14:13:04+08:00 ] 127.0.0.1 POST /blog/Api/public/index.php/admin/Login/index
+[ info ] localhost/blog/Api/public/index.php/admin/Login/index [运行时间：0.058003s][吞吐率：17.24req/s] [内存消耗：2,677.94kb] [文件加载：50]
+[ info ] [ LANG ] D:\phpstudy\PHPTutorial\WWW\blog\Api\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Login',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '39',
+  'cache-control' => 'max-age=0',
+  'connection' => 'close',
+  'cookie' => 'pgv_pvi=7650984960; bdshare_firstime=1510890686677; uid_cv_k_u_s=1VpwNozfAxsxlnT18839||||; Hm_lvt_fd74e8f9ce0ff4bad5a83064a8fc4006=1532341419; UM_distinctid=164c6aac613438-0128cd16f11e3b8-43574130-13c680-164c6aac6143; CNZZDATA1274061701=1320325861-1532336632-%7C1532336632; _ga=GA1.1.2105744487.1532341438; _gid=GA1.1.1677497449.1532341438',
+  'referer' => 'http://localhost:8081/',
+  'content-type' => 'application/json;charset=utf-8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept' => 'application/json, text/plain, */*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0',
+  'host' => 'localhost',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'root',
+  'password' => '123456',
+)
+[ info ] [ RUN ] app\admin\controller\Login->index[ D:\phpstudy\PHPTutorial\WWW\blog\Api\application\admin\controller\Login.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+[ error ] [1049]SQLSTATE[HY000] [1049] Unknown database 'myblog'[D:\phpstudy\PHPTutorial\WWW\blog\Api\thinkphp\library\think\db\Connection.php:295]
+---------------------------------------------------------------
+[ 2018-07-24T14:13:40+08:00 ] 127.0.0.1 POST /blog/Api/public/index.php/admin/Login/index
+[ info ] localhost/blog/Api/public/index.php/admin/Login/index [运行时间：0.143008s][吞吐率：6.99req/s] [内存消耗：2,879.17kb] [文件加载：55]
+[ info ] [ LANG ] D:\phpstudy\PHPTutorial\WWW\blog\Api\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Login',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '39',
+  'cache-control' => 'max-age=0',
+  'connection' => 'close',
+  'cookie' => 'pgv_pvi=7650984960; bdshare_firstime=1510890686677; uid_cv_k_u_s=1VpwNozfAxsxlnT18839||||; Hm_lvt_fd74e8f9ce0ff4bad5a83064a8fc4006=1532341419; UM_distinctid=164c6aac613438-0128cd16f11e3b8-43574130-13c680-164c6aac6143; CNZZDATA1274061701=1320325861-1532336632-%7C1532336632; _ga=GA1.1.2105744487.1532341438; _gid=GA1.1.1677497449.1532341438',
+  'referer' => 'http://localhost:8081/',
+  'content-type' => 'application/json;charset=utf-8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept' => 'application/json, text/plain, */*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0',
+  'host' => 'localhost',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'root',
+  'password' => '123456',
+)
+[ info ] [ RUN ] app\admin\controller\Login->index[ D:\phpstudy\PHPTutorial\WWW\blog\Api\application\admin\controller\Login.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.014001s ] mysql:host=127.0.0.1;dbname=myblog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `blog_admin_user` [ RunTime:0.009000s ]
+[ sql ] [ SQL ] SELECT * FROM `blog_admin_user` WHERE  `username` = 'root'  AND `password` = '912601e4ad1b308c9ae41877cf6ca754' LIMIT 1 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `blog_admin_user_data` [ RunTime:0.008000s ]
+[ sql ] [ SQL ] SELECT * FROM `blog_admin_user_data` WHERE  `uid` = '1' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] UPDATE `blog_admin_user_data`  SET `loginTimes`=1,`lastLoginIp`=2130706433,`lastLoginTime`=1532412820  WHERE  `id` = 1 [ RunTime:0.027002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `blog_admin_menu` [ RunTime:0.020001s ]
+[ sql ] [ SQL ] SELECT * FROM `blog_admin_menu` WHERE  `hide` = 0 [ RunTime:0.002000s ]
+---------------------------------------------------------------
+[ 2018-07-24T14:13:40+08:00 ] 127.0.0.1 GET /blog/Api/public/index.php/admin/Menu/index?ApiAuth=18ba2ec50f0e84768e94998868d41508
+[ info ] localhost/blog/Api/public/index.php/admin/Menu/index?ApiAuth=18ba2ec50f0e84768e94998868d41508 [运行时间：0.078005s][吞吐率：12.82req/s] [内存消耗：2,853.24kb] [文件加载：57]
+[ info ] [ LANG ] D:\phpstudy\PHPTutorial\WWW\blog\Api\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.003000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.002000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.039003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'close',
+  'cookie' => 'pgv_pvi=7650984960; bdshare_firstime=1510890686677; uid_cv_k_u_s=1VpwNozfAxsxlnT18839||||; Hm_lvt_fd74e8f9ce0ff4bad5a83064a8fc4006=1532341419; UM_distinctid=164c6aac613438-0128cd16f11e3b8-43574130-13c680-164c6aac6143; CNZZDATA1274061701=1320325861-1532336632-%7C1532336632; _ga=GA1.1.2105744487.1532341438; _gid=GA1.1.1677497449.1532341438',
+  'referer' => 'http://localhost:8081/',
+  'apiauth' => '18ba2ec50f0e84768e94998868d41508',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept' => 'application/json, text/plain, */*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0',
+  'host' => 'localhost',
+)
+[ info ] [ PARAM ] array (
+  'ApiAuth' => '18ba2ec50f0e84768e94998868d41508',
+)
+[ info ] [ RUN ] app\admin\controller\Menu->index[ D:\phpstudy\PHPTutorial\WWW\blog\Api\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003000s ] mysql:host=127.0.0.1;dbname=myblog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `blog_admin_menu` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `blog_admin_menu` WHERE  `url` = 'admin/Menu/index' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `blog_admin_user_action` [ RunTime:0.008000s ]
+[ sql ] [ SQL ] INSERT INTO `blog_admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单列表' , 1 , 'root' , 1532412820 , 'admin/Menu/index' , '{\"ApiAuth\":\"18ba2ec50f0e84768e94998868d41508\"}') [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `blog_admin_menu` ORDER BY `sort` ASC [ RunTime:0.003000s ]
