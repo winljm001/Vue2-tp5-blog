@@ -1,5 +1,6 @@
 import { loginByUsername, logout, getUserInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
+import { setUserinfo } from '@/utils/userinfo'
 
 const user = {
   state: {
@@ -50,12 +51,12 @@ const user = {
       return new Promise((resolve, reject) => {
         loginByUsername(username, userInfo.password).then(response => {
           const data = response.data.data
-          console.log(response.data.msg)
           if (response.data.msg === '登录成功') {
             commit('SET_TOKEN', data.apiAuth)
             commit('SET_NAME', data.nickname)
             commit('SET_AVATAR', data.headImg)
             setToken(data.apiAuth)
+            setUserinfo(data.nickname, data.headImg)
           } else {
             reject('用户名或者密码错误！')
           }
