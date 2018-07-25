@@ -41,9 +41,7 @@ export default {
   },
   methods: {
     fetchData() {
-      fetchList().then(response => {
-        this.list = response.data.items.slice(0, 8)
-      })
+
     }
   }
 }
