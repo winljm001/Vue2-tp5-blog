@@ -10,7 +10,7 @@
 import Footer from "./common/Footer";
 import Header from "./common/Header";
 export default {
-  name: "main",
+  name: "mymain",
   components: {
     Footer,
     Header

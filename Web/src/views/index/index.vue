@@ -250,6 +250,11 @@ export default {
   font-size: 18px;
   text-align: center;
 }
+@media screen and (max-width: 860px) {
+  .main .topcn {
+    padding: 0 36px;
+  }
+}
 @media screen and (max-width: 768px) {
   .main .top_logo {
     font-size: 10vw;
@@ -258,11 +263,6 @@ export default {
   }
   .main .nav {
     margin-top: 5vw;
-  }
-}
-@media screen and (max-width: 860px) {
-  .main .topcn {
-    padding: 0 36px;
   }
 }
 </style>
