@@ -86,8 +86,7 @@ export default {
       // 星星移动速度
       this.alpha = that.random(2, 10) / 10;
 
-      that.count++;
-      that.stars[that.count] = this;
+      return this;
     };
 
     that.Star.prototype.draw = function() {
@@ -111,8 +110,10 @@ export default {
       );
       this.timePassed += this.speed;
     };
-    for (var i = 0; i < this.maxStars; i++) {
-      new this.Star();
+    for (let i = 0; i < this.maxStars; i++) {
+      let tempStar = new this.Star();
+      this.count++;
+      this.stars[this.count] = tempStar;
     }
     this.animation();
   },
@@ -158,7 +159,7 @@ export default {
   margin: 0 auto;
   width: 100%;
   height: 640px;
-  background-color: #000;
+  /*background-color: #000;*/
   position: relative;
 }
 .header canvas {
