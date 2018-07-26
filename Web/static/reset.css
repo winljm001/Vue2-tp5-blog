@@ -25,8 +25,11 @@ p, blockquote, figure, hr, menu, dir,
 thead, tbody, tfoot, th, td {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
-
+div{
+  box-sizing: border-box; 
+}
 /**
 * 非大面积文字排版网站通常不需要列表项，如果需要可单独设置
 */

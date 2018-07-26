@@ -1,24 +1,22 @@
 <template>
   <div class="index">
-    <div class="header" id="demo">
-      <div class="top_logo">
-      啦啦啦
-      </div>  
-         
-      <div class="topcn" style="font:20px/18px &#39;microsoft yahei&#39;; color:#199cc4;text-align:center;">
-        <p>&nbsp;</p>
-        <p>内容区域</p>
-      </div>
-        
+    <div class="main" id="demo">
+      <div class="content">
+        <div class="top_logo">
+        啦啦啦
+        </div>  
+        <div class="topcn">
+          <p>内容区域</p>
+        </div>
         <div class="nav">
           <a class="gv" href="index.html#">首页</a>
           <a class="gv" href="index.html#">文章</a>
           <a class="gv" href="index.html#">笔记</a>
           <a class="gv" href="index.html#">资源下载</a>
           <a class="gv" href="index.html#">关于作者</a>
-       </div>
-        
-      <div class="canvaszz"> </div>
+        </div>
+      </div>
+      <div class="canvaszz"></div>
       <canvas id="canvas" width="1440" height="769"></canvas> 
     </div>
   </div>
@@ -116,6 +114,14 @@ export default {
       this.stars[this.count] = tempStar;
     }
     this.animation();
+    window.onresize = () => {
+      this.w = canvas.width = window.innerWidth;
+      this.h = canvas.height = window.innerHeight;
+      this.stars.forEach(v => {
+        v.orbitX = this.w / 2;
+        v.orbitY = this.h / 2;
+      });
+    };
   },
   methods: {
     random(min, max) {
@@ -155,14 +161,13 @@ export default {
 };
 </script>
 <style scoped>
-.header {
+.main {
   margin: 0 auto;
   width: 100%;
-  height: 640px;
-  /*background-color: #000;*/
+  min-height: 100vh;
   position: relative;
 }
-.header canvas {
+.main canvas {
   width: 100%;
   height: auto;
   display: inline-block;
@@ -170,11 +175,11 @@ export default {
   position: absolute;
   z-index: -1;
 }
-.header .canvaszz {
+.main .canvaszz {
   /*用来解决视频右键菜单，用于视频上面的遮罩层*/
   width: 100%;
   background-image: url(../../assets/img/in_top_bj.jpg);
-  height: 640px;
+  min-height: 100vh;
   position: absolute;
   z-index: 10;
   filter: alpha(opacity=40);
@@ -182,38 +187,38 @@ export default {
   -khtml-opacity: 0.4;
   opacity: 0.4;
 }
-
-.header .top_logo {
+.main .content {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  z-index: 30;
+}
+.main .top_logo {
   background-image: url(../../assets/img/top_logo.png);
   background-repeat: no-repeat;
   background-position: center center;
   margin: 0 auto;
-  width: 750px;
+  width: 100%;
   height: 129px;
   line-height: 129px;
   text-align: center;
   margin-top: 70px;
-  position: absolute;
-  z-index: 30;
-  top: 10px;
-  left: 50%;
-  color: #199cc4;
+  color: #2d8cf0;
   font-size: 86px;
-  margin-left: -390px;
 }
 
-.header .nav {
-  width: 804px;
+.main .nav {
+  max-width: 800px;
+  width: 100%;
   display: flex;
   justify-content: space-around;
-  height: auto;
-  position: absolute;
-  z-index: 30;
-  top: 420px;
-  left: 50%;
-  margin-left: -400px;
+  flex-wrap: wrap-reverse;
+  margin: 0 auto;
+  margin-top: 64px;
 }
-.header .nav a.gv {
+.main .nav a.gv {
   text-decoration: none;
   background: url(../../assets/img/nav_gv.png) repeat 0px 0px;
   width: 130px;
@@ -225,24 +230,39 @@ export default {
   float: left; /*左浮动*/
   margin: 8px 2px 8px 2px;
   font: 18px/43px "microsoft yahei";
-  color: #066197;
+  color: #2d8cf0;
 }
-.header .nav a.gv span {
+.main .nav a.gv span {
   display: none;
 }
-.header .nav a.gv:hover {
+.main .nav a.gv:hover {
   background: url(../../assets/img/nav_gv.png) repeat 0px -43px;
-  color: #1d7eb8;
-  -webkit-box-shadow: 0 0 6px #1d7eb8;
+  color: #2d8cf0;
+  -webkit-box-shadow: 0 0 6px #2d8cf0;
   transition-duration: 0.5s;
 }
 
-.header .topcn {
-  width: 980px;
-  top: 200px;
-  left: 50%;
-  margin-left: -490px;
-  position: absolute;
-  z-index: 20;
+.main .topcn {
+  max-width: 860px;
+  width: 100%;
+  margin: 18px auto 0;
+  color: #2d8cf0;
+  font-size: 18px;
+  text-align: center;
+}
+@media screen and (max-width: 768px) {
+  .main .top_logo {
+    font-size: 10vw;
+    background-size: 70% auto;
+    margin-top: 5vw;
+  }
+  .main .nav {
+    margin-top: 5vw;
+  }
+}
+@media screen and (max-width: 860px) {
+  .main .topcn {
+    padding: 0 36px;
+  }
 }
 </style>
