@@ -1,0 +1,247 @@
+<template>
+  <div class="index">
+    <div class="header" id="demo">
+      <div class="top_logo">
+      啦啦啦
+      </div>  
+         
+      <div class="topcn" style="font:20px/18px &#39;microsoft yahei&#39;; color:#199cc4;text-align:center;">
+        <p>&nbsp;</p>
+        <p>内容区域</p>
+      </div>
+        
+        <div class="nav">
+          <a class="gv" href="index.html#">首页</a>
+          <a class="gv" href="index.html#">文章</a>
+          <a class="gv" href="index.html#">笔记</a>
+          <a class="gv" href="index.html#">资源下载</a>
+          <a class="gv" href="index.html#">关于作者</a>
+       </div>
+        
+      <div class="canvaszz"> </div>
+      <canvas id="canvas" width="1440" height="769"></canvas> 
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "index",
+  data() {
+    return {
+      canvas: {},
+      ctx: {},
+      w: 0,
+      h: 0,
+      hue: 217,
+      count: 0,
+      maxStars: 1300,
+      canvas2: {},
+      ctx2: {},
+      half: 0,
+      gradient2: {},
+      Star: {}
+    };
+  },
+  mounted() {
+    let that = this;
+    this.canvas = document.getElementById("canvas");
+    this.ctx = canvas.getContext("2d");
+    this.w = canvas.width = window.innerWidth;
+    this.h = canvas.height = window.innerHeight;
+    this.hue = 217;
+    this.stars = [];
+    this.count = 0;
+    this.maxStars = 1300; // 星星数量
+    this.canvas2 = document.createElement("canvas");
+    this.ctx2 = this.canvas2.getContext("2d");
+    this.canvas2.width = 100;
+    this.canvas2.height = 100;
+    this.half = this.canvas2.width / 2;
+    this.gradient2 = this.ctx2.createRadialGradient(
+      this.half,
+      this.half,
+      0,
+      this.half,
+      this.half,
+      this.half
+    );
+    this.gradient2.addColorStop(0.025, "#CCC");
+    this.gradient2.addColorStop(0.1, "hsl(" + this.hue + ", 61%, 33%)");
+    this.gradient2.addColorStop(0.25, "hsl(" + this.hue + ", 64%, 6%)");
+    this.gradient2.addColorStop(1, "transparent");
+    this.ctx2.fillStyle = this.gradient2;
+    this.ctx2.beginPath();
+    this.ctx2.arc(this.half, this.half, this.half, 0, Math.PI * 2);
+    this.ctx2.fill();
+
+    that.Star = function() {
+      this.orbitRadius = that.random(that.maxOrbit(that.w, that.h));
+      this.radius = that.random(60, this.orbitRadius) / 8;
+      // 星星大小
+      this.orbitX = that.w / 2;
+      this.orbitY = that.h / 2;
+      this.timePassed = that.random(0, that.maxStars);
+      this.speed = that.random(this.orbitRadius) / 800000;
+      // 星星移动速度
+      this.alpha = that.random(2, 10) / 10;
+
+      that.count++;
+      that.stars[that.count] = this;
+    };
+
+    that.Star.prototype.draw = function() {
+      let x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX;
+      let y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY;
+      let twinkle = that.random(10);
+
+      if (twinkle === 1 && this.alpha > 0) {
+        this.alpha -= 0.05;
+      } else if (twinkle === 2 && this.alpha < 1) {
+        this.alpha += 0.05;
+      }
+
+      that.ctx.globalAlpha = this.alpha;
+      that.ctx.drawImage(
+        that.canvas2,
+        x - this.radius / 2,
+        y - this.radius / 2,
+        this.radius,
+        this.radius
+      );
+      this.timePassed += this.speed;
+    };
+    for (var i = 0; i < this.maxStars; i++) {
+      new this.Star();
+    }
+    this.animation();
+  },
+  methods: {
+    random(min, max) {
+      if (arguments.length < 2) {
+        max = min;
+        min = 0;
+      }
+
+      if (min > max) {
+        let hold = max;
+        max = min;
+        min = hold;
+      }
+
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+    maxOrbit(x, y) {
+      let max = Math.max(x, y);
+      let diameter = Math.round(Math.sqrt(max * max + max * max));
+      return diameter / 2;
+      // 星星移动范围，值越大范围越小，
+    },
+    animation() {
+      this.ctx.globalCompositeOperation = "source-over";
+      this.ctx.globalAlpha = 0.5; // 尾巴
+      this.ctx.fillStyle = "hsla(" + this.hue + ", 64%, 6%, 2)";
+      this.ctx.fillRect(0, 0, this.w, this.h);
+
+      this.ctx.globalCompositeOperation = "lighter";
+      for (var i = 1, l = this.stars.length; i < l; i++) {
+        this.stars[i].draw();
+      }
+
+      window.requestAnimationFrame(this.animation);
+    }
+  }
+};
+</script>
+<style scoped>
+.header {
+  margin: 0 auto;
+  width: 100%;
+  height: 640px;
+  background-color: #000;
+  position: relative;
+}
+.header canvas {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  vertical-align: baseline;
+  position: absolute;
+  z-index: -1;
+}
+.header .canvaszz {
+  /*用来解决视频右键菜单，用于视频上面的遮罩层*/
+  width: 100%;
+  background-image: url(../../assets/img/in_top_bj.jpg);
+  height: 640px;
+  position: absolute;
+  z-index: 10;
+  filter: alpha(opacity=40);
+  -moz-opacity: 0.4;
+  -khtml-opacity: 0.4;
+  opacity: 0.4;
+}
+
+.header .top_logo {
+  background-image: url(../../assets/img/top_logo.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin: 0 auto;
+  width: 750px;
+  height: 129px;
+  line-height: 129px;
+  text-align: center;
+  margin-top: 70px;
+  position: absolute;
+  z-index: 30;
+  top: 10px;
+  left: 50%;
+  color: #199cc4;
+  font-size: 86px;
+  margin-left: -390px;
+}
+
+.header .nav {
+  width: 804px;
+  display: flex;
+  justify-content: space-around;
+  height: auto;
+  position: absolute;
+  z-index: 30;
+  top: 420px;
+  left: 50%;
+  margin-left: -400px;
+}
+.header .nav a.gv {
+  text-decoration: none;
+  background: url(../../assets/img/nav_gv.png) repeat 0px 0px;
+  width: 130px;
+  height: 43px;
+  display: block;
+  text-align: center; /*水平居中*/
+  line-height: 43px; /*上下居中*/
+  cursor: pointer;
+  float: left; /*左浮动*/
+  margin: 8px 2px 8px 2px;
+  font: 18px/43px "microsoft yahei";
+  color: #066197;
+}
+.header .nav a.gv span {
+  display: none;
+}
+.header .nav a.gv:hover {
+  background: url(../../assets/img/nav_gv.png) repeat 0px -43px;
+  color: #1d7eb8;
+  -webkit-box-shadow: 0 0 6px #1d7eb8;
+  transition-duration: 0.5s;
+}
+
+.header .topcn {
+  width: 980px;
+  top: 200px;
+  left: 50%;
+  margin-left: -490px;
+  position: absolute;
+  z-index: 20;
+}
+</style>
