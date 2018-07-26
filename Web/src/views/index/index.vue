@@ -2,18 +2,16 @@
   <div class="index">
     <div class="main" id="demo">
       <div class="content">
-        <div class="top_logo">
-        啦啦啦
-        </div>  
+        <div class="top_logo"></div>  
         <div class="topcn">
-          <p>内容区域</p>
+          <p>这星空一般，学无止境</p>
         </div>
         <div class="nav">
-          <a class="gv" href="index.html#">首页</a>
-          <a class="gv" href="index.html#">文章</a>
-          <a class="gv" href="index.html#">笔记</a>
-          <a class="gv" href="index.html#">资源下载</a>
-          <a class="gv" href="index.html#">关于作者</a>
+          <router-link to="/home" class="gv">首页</router-link>
+          <router-link to="/article" class="gv">文章</router-link>
+          <router-link to="/note" class="gv">笔记</router-link>
+          <router-link to="/resource" class="gv">资源下载</router-link>
+          <router-link to="/author" class="gv">关于作者</router-link>
         </div>
       </div>
       <div class="canvaszz"></div>
@@ -178,7 +176,8 @@ export default {
 .main .canvaszz {
   /*用来解决视频右键菜单，用于视频上面的遮罩层*/
   width: 100%;
-  background-image: url(../../assets/img/in_top_bj.jpg);
+  background-image: url(../../assets/img/5a28eaddb3fbc.jpg);
+  background-size: 100% 100%;
   min-height: 100vh;
   position: absolute;
   z-index: 10;
@@ -205,7 +204,7 @@ export default {
   line-height: 129px;
   text-align: center;
   margin-top: 70px;
-  color: #2d8cf0;
+  color: #fff;
   font-size: 86px;
 }
 
@@ -221,6 +220,7 @@ export default {
 .main .nav a.gv {
   text-decoration: none;
   background: url(../../assets/img/nav_gv.png) repeat 0px 0px;
+  /*background-color: rgba(255, 255, 255, 0.1);*/
   width: 130px;
   height: 43px;
   display: block;
@@ -230,15 +230,15 @@ export default {
   float: left; /*左浮动*/
   margin: 8px 2px 8px 2px;
   font: 18px/43px "microsoft yahei";
-  color: #2d8cf0;
+  color: #fff;
 }
 .main .nav a.gv span {
   display: none;
 }
 .main .nav a.gv:hover {
   background: url(../../assets/img/nav_gv.png) repeat 0px -43px;
-  color: #2d8cf0;
-  -webkit-box-shadow: 0 0 6px #2d8cf0;
+  color: #fff;
+  -webkit-box-shadow: 0 0 6px #fff;
   transition-duration: 0.5s;
 }
 
@@ -246,7 +246,7 @@ export default {
   max-width: 860px;
   width: 100%;
   margin: 18px auto 0;
-  color: #2d8cf0;
+  color: #fff;
   font-size: 18px;
   text-align: center;
 }
