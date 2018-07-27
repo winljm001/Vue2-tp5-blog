@@ -6,23 +6,25 @@
   			<img src="../../assets/img/logo.png">
   		</router-link>
       <!-- 菜单 -->
-      <el-menu :default-active="activeIndex" class  ="header-menu" :mode="menuMode" @select="handleSelect" v-show="menuVisible">
-        <el-menu-item index="1">处理中心</el-menu-item>
-        <el-submenu index="2">
-          <template slot="title">我的工作台</template>
-          <el-menu-item index="3-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-          <el-menu-item index="2-3">选项3</el-menu-item>
-          <el-submenu index="2-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="2-4-1">选项1</el-menu-item>
-            <el-menu-item index="2-4-2">选项2</el-menu-item>
-            <el-menu-item index="2-4-3">选项3</el-menu-item>
+      <transition :name="transitionName">
+        <el-menu :default-active="activeIndex" class  ="header-menu" :mode="menuMode" @select="handleSelect" v-show="menuVisible">
+          <el-menu-item index="1">处理中心</el-menu-item>
+          <el-submenu index="2">
+            <template slot="title">我的工作台</template>
+            <el-menu-item index="3-1">选项1</el-menu-item>
+            <el-menu-item index="2-2">选项2</el-menu-item>
+            <el-menu-item index="2-3">选项3</el-menu-item>
+            <el-submenu index="2-4">
+              <template slot="title">选项4</template>
+              <el-menu-item index="2-4-1">选项1</el-menu-item>
+              <el-menu-item index="2-4-2">选项2</el-menu-item>
+              <el-menu-item index="2-4-3">选项3</el-menu-item>
+            </el-submenu>
           </el-submenu>
-        </el-submenu>
-        <el-menu-item index="3" disabled>消息中心</el-menu-item>
-        <el-menu-item index="4" disabled>消息中心</el-menu-item>
-      </el-menu>
+          <el-menu-item index="3" disabled>消息中心</el-menu-item>
+          <el-menu-item index="4" disabled>消息中心</el-menu-item>
+        </el-menu>
+      </transition>
       <i class="el-icon-menu xs-menu" @click="toggleMenu"></i>
       <!-- 搜索框 -->
   		<el-input placeholder="请输入搜索内容" v-model="keywords" size="small" class="header-search" @keyup.enter.native="searchKeywords">
@@ -61,7 +63,8 @@ export default {
       menuVisible: !(document.body.clientWidth < 640),
       screenWidth: document.body.clientWidth,
       menuMode: document.body.clientWidth < 640 ? "vertical" : "horizontal",
-      timerFlag: false
+      timerFlag: false,
+      transitionName: document.body.clientWidth < 640 ? "slide-fade" : ""
     };
   },
   mounted() {
@@ -81,17 +84,18 @@ export default {
         setTimeout(function() {
           that.timerFlag = false;
           if (val < 640) {
-            if (that.menuMode == "horizontal") {
+            if (that.menuMode === "horizontal") {
               that.menuVisible = false;
+              that.transitionName = "slide-fade";
             }
             that.menuMode = "vertical";
           } else {
-            if (that.menuMode == "vertical") {
+            if (that.menuMode === "vertical") {
               that.menuVisible = true;
             }
             that.menuMode = "horizontal";
           }
-        }, 400);
+        }, 100);
       }
     }
   },
