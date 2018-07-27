@@ -1,32 +1,48 @@
 <template>
   <div class="header">
-	<div class="header-wrap">
-		<router-link to="/home" class="header-logo">
-			<img src="../../assets/img/logo.png">
-		</router-link>
-  		<el-menu :default-active="activeIndex" class="header-menu" mode="horizontal" @select="handleSelect">
-		  <el-menu-item index="1">处理中心</el-menu-item>
-		  <el-submenu index="2">
-		    <template slot="title">我的工作台</template>
-		    <el-menu-item index="2-1">选项1</el-menu-item>
-		    <el-menu-item index="2-2">选项2</el-menu-item>
-		    <el-menu-item index="2-3">选项3</el-menu-item>
-		    <el-submenu index="2-4">
-		      <template slot="title">选项4</template>
-		      <el-menu-item index="2-4-1">选项1</el-menu-item>
-		      <el-menu-item index="2-4-2">选项2</el-menu-item>
-		      <el-menu-item index="2-4-3">选项3</el-menu-item>
-		    </el-submenu>
-		  </el-submenu>
-		  <el-menu-item index="3" disabled>消息中心</el-menu-item>
-		  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
-		</el-menu>
-		<i class="el-icon-menu xs-menu"></i>
-		<el-input placeholder="请输入搜索内容" v-model="keywords" class="header-search">
-		    <el-button slot="append" icon="el-icon-search"></el-button>
-		</el-input>
-		<i class="el-icon-search xs-search"></i>
-	</div>
+  	<div class="header-wrap">
+      <!-- logo -->
+  		<router-link to="/home" class="header-logo">
+  			<img src="../../assets/img/logo.png">
+  		</router-link>
+      <!-- 菜单 -->
+      <el-menu :default-active="activeIndex" class  ="header-menu" :mode="menuMode" @select="handleSelect" v-show="menuVisible">
+        <el-menu-item index="1">处理中心</el-menu-item>
+        <el-submenu index="2">
+          <template slot="title">我的工作台</template>
+          <el-menu-item index="3-1">选项1</el-menu-item>
+          <el-menu-item index="2-2">选项2</el-menu-item>
+          <el-menu-item index="2-3">选项3</el-menu-item>
+          <el-submenu index="2-4">
+            <template slot="title">选项4</template>
+            <el-menu-item index="2-4-1">选项1</el-menu-item>
+            <el-menu-item index="2-4-2">选项2</el-menu-item>
+            <el-menu-item index="2-4-3">选项3</el-menu-item>
+          </el-submenu>
+        </el-submenu>
+        <el-menu-item index="3" disabled>消息中心</el-menu-item>
+        <el-menu-item index="4" disabled>消息中心</el-menu-item>
+      </el-menu>
+      <i class="el-icon-menu xs-menu" @click="toggleMenu"></i>
+      <!-- 搜索框 -->
+  		<el-input placeholder="请输入搜索内容" v-model="keywords" size="small" class="header-search" @keyup.enter.native="searchKeywords">
+  		    <el-button slot="append" icon="el-icon-search" @click="searchKeywords"></el-button>
+  		</el-input>
+  		<i class="el-icon-search xs-search" @click="searchDialogVisible=!searchDialogVisible"></i>
+  	</div>
+    <el-dialog
+      title="搜索"
+      :visible.sync="searchDialogVisible"
+      center
+      customClass="search-dialog"
+      >
+      <div>
+        <el-input placeholder="请输入搜索内容" v-model="keywords" size="small" class="header-search" @keyup.enter.native="searchKeywords">
+            <el-button slot="append" icon="el-icon-search" @click="searchKeywords"></el-button>
+        </el-input>
+      </div>
+    </el-dialog>
+    <div class="header-occupied"></div>
   </div>
 </template>
 
@@ -34,83 +50,76 @@
 export default {
   name: "myheader",
   data() {
-    return { activeIndex: "1", keywords: "" };
+    return {
+      // 菜单索引
+      activeIndex: "1",
+      // 搜索关键字
+      keywords: "",
+      // 搜索模态框显示flag
+      searchDialogVisible: false,
+      // 侧边导航显示flag
+      menuVisible: !(document.body.clientWidth < 640),
+      screenWidth: document.body.clientWidth,
+      menuMode: document.body.clientWidth < 640 ? "vertical" : "horizontal",
+      timerFlag: false
+    };
   },
-  mounted() {},
+  mounted() {
+    const that = this;
+    window.onresize = () => {
+      return (() => {
+        window.screenWidth = document.body.clientWidth;
+        that.screenWidth = window.screenWidth;
+      })();
+    };
+  },
+  watch: {
+    screenWidth(val) {
+      if (!this.timerFlag) {
+        this.timerFlag = true;
+        let that = this;
+        setTimeout(function() {
+          that.timerFlag = false;
+          if (val < 640) {
+            if (that.menuMode == "horizontal") {
+              that.menuVisible = false;
+            }
+            that.menuMode = "vertical";
+          } else {
+            if (that.menuMode == "vertical") {
+              that.menuVisible = true;
+            }
+            that.menuMode = "horizontal";
+          }
+        }, 400);
+      }
+    }
+  },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    searchKeywords() {
+      if (this.keywords === "") {
+        this.$message.error("请输入搜索内容");
+      } else {
+        console.log(this.keywords);
+      }
+    },
+    toggleMenu() {
+      this.menuVisible = !this.menuVisible;
+      // this.menuMode = "horizontal";
     }
   }
 };
 </script>
 <style scoped>
-.header-wrap {
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  border-bottom: solid 1px #e6e6e6;
-  justify-content: space-between;
-  min-height: 54px;
-}
-.header-wrap .el-menu--horizontal {
-  border-bottom: none;
-}
-.header-wrap .header-logo {
-  flex-shrink: 0;
-  margin-right: 24px;
-}
-.header-wrap .header-logo img {
-  width: 120px;
-  height: 36px;
-}
-.header-wrap .header-menu {
-  flex-grow: 1;
-}
-.header-wrap .header-search {
-  flex-basis: 20%;
-  min-width: 240px;
-}
-.header-wrap .xs-search {
-  font-size: 24px;
-  margin: 0 12px;
-  cursor: pointer;
-  display: none;
-}
-.header-wrap .xs-menu {
-  font-size: 24px;
-  margin: 0 12px;
-  cursor: pointer;
-  display: none;
-}
-@media screen and (max-width: 960px) {
-  .header-wrap .header-logo {
-    display: none;
-  }
-}
-@media screen and (max-width: 800px) {
-  .header-wrap .header-search {
-    display: none;
-  }
-  .header-wrap .xs-search {
-    display: block;
-  }
-}
-@media screen and (max-width: 768px) {
-  .header-wrap .el-menu-item,
-  .header-wrap .el-submenu__title {
-    padding: 0 8px;
-  }
-  .header-wrap {
-    padding: 0 8px;
-  }
-}
+@import url("../../assets/css/header.css");
+</style>
+<style>
 @media screen and (max-width: 480px) {
-  .header-wrap .header-menu {
-    display: none;
-  }
-  .header-wrap .xs-menu {
-    display: block;
+  .search-dialog.el-dialog {
+    width: 85%;
   }
 }
 </style>
