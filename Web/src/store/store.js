@@ -6,7 +6,29 @@ const store = new Vuex.Store({
   state: {
     // this.$store.state.mainTitle
     // 公共
-    mainTitle: ""
+    mainTitle: "",
+    menuData: [
+      {
+        navName: "首页",
+        url: "/home"
+      },
+      {
+        navName: "文章",
+        url: "/article"
+      },
+      {
+        navName: "笔记",
+        url: "/note"
+      },
+      {
+        navName: "资源下载",
+        url: "/resource"
+      },
+      {
+        navName: "关于作者",
+        url: "/author"
+      }
+    ]
   },
   getters: {
     // this.$store.getters.comingMovieList

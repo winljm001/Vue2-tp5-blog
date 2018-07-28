@@ -7,24 +7,13 @@
   		</router-link>
       <!-- 菜单 -->
       <transition :name="transitionName">
-        <el-menu :default-active="activeIndex" class  ="header-menu" :mode="menuMode" @select="handleSelect" v-show="menuVisible">
-          <el-menu-item index="1">处理中心</el-menu-item>
-          <el-submenu index="2">
-            <template slot="title">我的工作台</template>
-            <el-menu-item index="3-1">选项1</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
-            <el-menu-item index="2-3">选项3</el-menu-item>
-            <el-submenu index="2-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="2-4-1">选项1</el-menu-item>
-              <el-menu-item index="2-4-2">选项2</el-menu-item>
-              <el-menu-item index="2-4-3">选项3</el-menu-item>
-            </el-submenu>
-          </el-submenu>
-          <el-menu-item index="3" disabled>消息中心</el-menu-item>
-          <el-menu-item index="4" disabled>消息中心</el-menu-item>
+        <el-menu :default-active="activeIndex" class  ="xs-header-menu" mode="vertical" @select="handleSelect" v-show="menuVisible">
+          <el-menu-item :index="v.url" v-for="v in menuData" :key="v.url">{{v.navName}}</el-menu-item>
         </el-menu>
       </transition>
+      <el-menu :default-active="activeIndex" class  ="header-menu" mode="horizontal" @select="handleSelect">
+          <el-menu-item :index="v.url" v-for="v in menuData" :key="v.url">{{v.navName}}</el-menu-item>
+        </el-menu>
       <i class="el-icon-menu xs-menu" @click="toggleMenu"></i>
       <!-- 搜索框 -->
   		<el-input placeholder="请输入搜索内容" v-model="keywords" size="small" class="header-search" @keyup.enter.native="searchKeywords">
@@ -54,18 +43,21 @@ export default {
   data() {
     return {
       // 菜单索引
-      activeIndex: "1",
+      activeIndex: this.$route.path,
       // 搜索关键字
       keywords: "",
       // 搜索模态框显示flag
       searchDialogVisible: false,
       // 侧边导航显示flag
-      menuVisible: !(document.body.clientWidth < 640),
+      menuVisible: false,
       screenWidth: document.body.clientWidth,
-      menuMode: document.body.clientWidth < 640 ? "vertical" : "horizontal",
-      timerFlag: false,
-      transitionName: document.body.clientWidth < 640 ? "slide-fade" : ""
+      transitionName: "slide-fade"
     };
+  },
+  computed: {
+    menuData: function() {
+      return this.$store.state.menuData;
+    }
   },
   mounted() {
     const that = this;
@@ -80,28 +72,18 @@ export default {
     screenWidth(val) {
       if (!this.timerFlag) {
         this.timerFlag = true;
-        let that = this;
-        setTimeout(function() {
-          that.timerFlag = false;
-          if (val < 640) {
-            if (that.menuMode === "horizontal") {
-              that.menuVisible = false;
-              that.transitionName = "slide-fade";
-            }
-            that.menuMode = "vertical";
-          } else {
-            if (that.menuMode === "vertical") {
-              that.menuVisible = true;
-            }
-            that.menuMode = "horizontal";
-          }
-        }, 100);
+        setTimeout(function() {}, 100);
       }
+    },
+    $route(to, from) {
+      this.activeIndex = to.path;
     }
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+      this.$router.push({
+        path: key
+      });
     },
     searchKeywords() {
       if (this.keywords === "") {
@@ -112,7 +94,6 @@ export default {
     },
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
-      // this.menuMode = "horizontal";
     }
   }
 };
