@@ -14,9 +14,6 @@
   				<dd>邮箱：winljm001@qq.com</dd>
   				<dd>领域：全栈漫漫长路发展ing</dd>
   			</dl>
-  			<div class="footer-form">
-  				form表单
-  			</div>
   		</div>
   		<div class="footer-tip">
   			<span>© 2015 - 2018 Mr li & 版权所有 </span>
@@ -30,6 +27,7 @@
 <script>
 export default {
   name: "myfooter",
+  components: {},
   data() {
     return {};
   },
@@ -46,7 +44,12 @@ export default {
 }
 .footer .footer-main {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.footer .web-info {
+  text-align: center;
+  flex-shrink: 0;
 }
 .footer .web-info dt {
   font-size: 20px;
@@ -55,6 +58,7 @@ export default {
 .footer .web-info dd {
   line-height: 32px;
   font-size: 16px;
+  color: #bbb;
 }
 .footer .footer-form {
   width: 50%;
@@ -66,13 +70,34 @@ export default {
 }
 .footer .footer-tip {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 18px;
   border-radius: 6px;
-  line-height: 32px;
-  height: 32px;
+  line-height: 42px;
   font-size: 14px;
   padding: 0 12px;
   background-color: #1f1f1f;
+}
+@media screen and (max-width: 1200px) {
+  .footer .container {
+    padding: 0 12px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .footer .web-info dt {
+    font-size: 18px;
+    line-height: 36px;
+  }
+  .footer .web-info dd {
+    line-height: 28px;
+    font-size: 14px;
+  }
+  .footer .container {
+    padding: 0 12px;
+  }
+  .footer .footer-tip {
+    font-size: 12px;
+  }
 }
 </style>
