@@ -89,12 +89,13 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: all 0.5s;
+  transform: scale(1) rotate(-1turn) translate(120px);
 }
 
 .fade-enter,
 .fade-leave-to {
-  opacity: 0;
+  opacity: 1;
 }
 
 .back-to-ceiling .Icon {
