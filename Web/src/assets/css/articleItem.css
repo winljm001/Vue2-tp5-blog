@@ -1,0 +1,101 @@
+.article-item {
+  background-color: #fff;
+  padding: 16px 20px;
+  border-bottom: 1px solid #dededd;
+}
+.article-item:hover {
+  border-bottom: 1px dashed #dededd;
+}
+.article-item .article-item-head {
+  border-bottom: 1px solid #f2f2f1;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.article-item .article-item-head:after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  bottom: -1px;
+  width: 0%;
+  height: 2px;
+  background-color: #409eff;
+  transition: width 0.5s;
+}
+.article-item:hover .article-item-head:after {
+  width: 100%;
+}
+.article-item-head .item-title {
+  color: #181817;
+}
+.article-item-head .article-item-info span {
+  color: #9c9d9b;
+  margin-right: 24px;
+  line-height: 40px;
+}
+.article-item-head .article-item-date {
+  line-height: 40px;
+  font-size: 16px;
+  color: #9c9d9b;
+}
+.article-item-head .article-item-date:before {
+  content: "[";
+  color: #409eff;
+  display: inline-block;
+  opacity: 0;
+  font-weight: bold;
+  transform: translateX(30px);
+  transition: all 0.5s;
+}
+.article-item:hover .article-item-head .article-item-date:before {
+  transform: translateX(0px);
+  opacity: 1;
+}
+.article-item-head .article-item-date:after {
+  content: "]";
+  color: #409eff;
+  display: inline-block;
+  opacity: 0;
+  font-weight: bold;
+  transform: translateX(-30px);
+  transition: all 0.5s;
+}
+.article-item:hover .article-item-head .article-item-date:after {
+  transform: translateX(0px);
+  opacity: 1;
+}
+.article-item:hover .article-item-head .article-item-date{
+  color:#409eff; 
+}
+.article-item-content{
+  padding: 18px 0;
+  line-height: 32px;
+  display: flex;
+  align-items: flex-start;
+}
+.article-item-content .article-img{
+  width: 30%;
+  flex-basis: 30%;
+  flex-shrink: 0;
+  height: auto;
+  margin-right:24px; 
+  min-width: 240px;
+  box-sizing: border-box;
+}
+.article-item-content .article-introduce{
+  
+}
+@media screen and (max-width: 640px) {
+  .article-item-content{
+    flex-direction:column;
+    align-items:center;
+  }
+  .article-item-content .article-img{
+    width: 80%;
+    flex-basis: 80%;
+    margin-right:0px;
+    min-width: 180px;
+    margin-bottom: 12px;
+  }
+}

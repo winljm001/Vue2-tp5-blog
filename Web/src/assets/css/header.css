@@ -13,6 +13,7 @@
 }
 .header-occupied{
   height: 61px;
+  transition: all 0.5s;
 }
 .header-wrap .el-menu--horizontal {
   border-bottom: none;
@@ -49,6 +50,13 @@
   cursor: pointer;
   order:1;
   display: none;
+}
+.header-wrap .el-menu-item,
+.header-wrap .el-submenu__title {
+  transition: all 0.5s;
+}
+.header-wrap {
+  transition: all 0.5s;
 }
 @media screen and (max-width: 960px) {
   .header-wrap .header-logo {
