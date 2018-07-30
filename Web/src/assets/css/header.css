@@ -10,6 +10,7 @@
   left: 0px;
   top: 0px;
   background-color: #fff;
+  z-index: 99;
 }
 .header-occupied{
   height: 61px;
