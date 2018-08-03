@@ -14,8 +14,8 @@
       <p class="article-introduce">{{articleData.introduce}}</p>
     </div>
     <div class="article-item-footer">
-      <p class="article-tag"><span v-for="v in articleData.tagList">{{v}}</span></p>
-      <div class="article-amount"><span>{{articleData.watchNum}}</span><span>{{articleData.commentNum}}</span></div>
+      <p class="article-tag"><i class="fa fa-tags"></i><span v-for="(v,i) in articleData.tagList" :key="i">{{v}}</span></p>
+      <div class="article-amount"><span><i class="fa fa-eye"></i>{{articleData.watchNum}}</span><span><i class="fa fa-commenting"></i>{{articleData.commentNum}}</span></div>
     </div>
   </section>
 </template>

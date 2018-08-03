@@ -171,7 +171,7 @@ export default {
   display: inline-block;
   vertical-align: baseline;
   position: absolute;
-  z-index: -1;
+  z-index: 1;
 }
 .main .canvaszz {
   /*用来解决视频右键菜单，用于视频上面的遮罩层*/
