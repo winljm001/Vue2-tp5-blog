@@ -123,6 +123,9 @@
 .article-item-footer span{
   margin-right: 12px;
 }
+.article-item-footer span:hover{
+  color: #409eff;
+}
 .article-item-footer i{
   margin-right: 6px;
   font-size: 16px;

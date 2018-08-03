@@ -1,20 +1,22 @@
 <template>
   <div class="index">
     <div class="recently-list">
-        <ArticleItem v-for="v in recentlyData" :key="v.id" :article-data="v"></ArticleItem>
+      <ArticleItem v-for="v in recentlyData" :key="v.id" :article-data="v"></ArticleItem>
     </div>
     <div class="side-content">
-        侧边内容
+      <SideMain></SideMain>
     </div>
   </div>
 </template>
 
 <script>
 import ArticleItem from "../common/ArticleItem";
+import SideMain from "../common/SideMain";
 export default {
   name: "index",
   components: {
-    ArticleItem
+    ArticleItem,
+    SideMain
   },
   data() {
     return {
@@ -68,7 +70,7 @@ export default {
   methods: {}
 };
 </script>
-<style scoped>
+<style lang="less" scoped>
 .index {
   width: 100%;
   max-width: 1200px;
@@ -76,11 +78,22 @@ export default {
   padding-top: 24px;
   padding-bottom: 36px;
   transition: all 0.5s;
+  display: flex;
 }
 @media screen and (max-width: 1200px) {
   .index {
     padding-left: 12px;
     padding-right: 12px;
+  }
+}
+.side-content {
+  flex-shrink: 0;
+  width: 320px;
+  margin-left: 24px;
+}
+@media screen and (max-width: 768px) {
+  .side-content {
+    display: none;
   }
 }
 </style>
