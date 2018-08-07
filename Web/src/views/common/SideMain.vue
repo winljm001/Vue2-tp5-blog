@@ -9,7 +9,7 @@
       <div class="side-item">
         <h3>热门文章<i class="dot fa fa-circle-o-notch fa-spin"></i></h3>
         <div>
-          标签云内容
+          <HotArticle></HotArticle>
         </div>
       </div>
   </div>
@@ -17,11 +17,13 @@
 
 <script>
 import CloudTag from "./CloudTag";
+import HotArticle from "./HotArticle";
 
 export default {
   name: "myside",
   components: {
-    CloudTag
+    CloudTag,
+    HotArticle
   },
   data() {
     return {};

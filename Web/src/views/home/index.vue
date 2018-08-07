@@ -2,6 +2,7 @@
   <div class="index">
     <div class="recently-list">
       <ArticleItem v-for="v in recentlyData" :key="v.id" :article-data="v"></ArticleItem>
+      <button class="loading-more-btn" @click="loadMore">加载更多</button>
     </div>
     <div class="side-content">
       <SideMain></SideMain>
@@ -67,7 +68,11 @@ export default {
     };
   },
   mounted() {},
-  methods: {}
+  methods: {
+    loadMore() {
+      console.log("加载更多");
+    }
+  }
 };
 </script>
 <style lang="less" scoped>
@@ -94,6 +99,20 @@ export default {
 @media screen and (max-width: 768px) {
   .side-content {
     display: none;
+  }
+}
+.loading-more-btn {
+  display: block;
+  border: none;
+  background-color: #409eff;
+  color: #fff;
+  width: 100%;
+  line-height: 32px;
+  height: 32px;
+  font-size: 16px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0px 3px 6px 0px #fff;
   }
 }
 </style>

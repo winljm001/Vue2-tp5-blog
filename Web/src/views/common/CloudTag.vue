@@ -40,4 +40,7 @@ export default {
 </script>
 
 <style lang="less">
+.tag-cloud p {
+  cursor: pointer;
+}
 </style>
