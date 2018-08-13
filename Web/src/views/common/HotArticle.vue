@@ -49,6 +49,9 @@ export default {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   .num {
     margin-right: 6px;

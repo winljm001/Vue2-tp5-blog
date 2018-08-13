@@ -5,19 +5,32 @@
       <button class="loading-more-btn" @click="loadMore">加载更多</button>
     </div>
     <div class="side-content">
-      <SideMain></SideMain>
+      <div class="side-item">
+        <h3>热门标签<i class="dot fa fa-circle-o-notch fa-spin"></i></h3>
+        <div>
+          <CloudTag></CloudTag>
+        </div>
+      </div>
+      <div class="side-item">
+        <h3>热门文章<i class="dot fa fa-circle-o-notch fa-spin"></i></h3>
+        <div>
+          <HotArticle></HotArticle>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import ArticleItem from "../common/ArticleItem";
-import SideMain from "../common/SideMain";
+import CloudTag from "../common/CloudTag";
+import HotArticle from "../common/HotArticle";
 export default {
   name: "index",
   components: {
     ArticleItem,
-    SideMain
+    CloudTag,
+    HotArticle
   },
   data() {
     return {
@@ -76,6 +89,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+@import url("../../assets/css/sideMain.less");
 .index {
   width: 100%;
   max-width: 1200px;
