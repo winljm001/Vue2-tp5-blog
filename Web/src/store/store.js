@@ -17,12 +17,12 @@ const store = new Vuex.Store({
         url: "/article"
       },
       {
-        navName: "笔记",
-        url: "/note"
-      },
-      {
         navName: "资源下载",
         url: "/resource"
+      },
+      {
+        navName: "留言",
+        url: "/bless"
       },
       {
         navName: "关于作者",

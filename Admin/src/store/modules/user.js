@@ -1,15 +1,16 @@
 import { loginByUsername, logout } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { setUserinfo, getUserinfo, removeUserinfo } from '@/utils/userinfo'
-
+const userInfo = getUserinfo()
 const user = {
   state: {
     user: '',
     status: '',
     code: '',
     token: getToken(),
-    name: getUserinfo().name,
-    avatar: getUserinfo().avatar,
+    uid: userInfo.uid,
+    name: userInfo.name,
+    avatar: userInfo.avatar,
     introduction: '',
     roles: ['admin'],
     setting: {
@@ -39,6 +40,9 @@ const user = {
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
     },
+    SET_UID: (state, id) => {
+      state.uid = id
+    },
     SET_ROLES: (state, roles) => {
       state.roles = roles
     }
@@ -55,8 +59,9 @@ const user = {
             commit('SET_TOKEN', data.apiAuth)
             commit('SET_NAME', data.nickname)
             commit('SET_AVATAR', data.headImg)
+            commit('SET_UID', data.id)
             setToken(data.apiAuth)
-            setUserinfo(data.nickname, data.headImg)
+            setUserinfo(data.nickname, data.headImg, data.id)
           } else {
             reject('用户名或者密码错误！')
           }
@@ -72,6 +77,9 @@ const user = {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
+          commit('SET_NAME', '')
+          commit('SET_UID', '')
+          commit('SET_AVATAR', '')
           commit('SET_ROLES', [])
           removeToken()
           removeUserinfo()

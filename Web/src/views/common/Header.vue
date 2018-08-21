@@ -2,7 +2,7 @@
   <div class="header">
   	<div class="header-wrap">
       <!-- logo -->
-  		<router-link to="/home" class="header-logo">
+  		<router-link to="/" class="header-logo">
   			<img src="../../assets/img/logo.png">
   		</router-link>
       <!-- 菜单 -->

@@ -7,7 +7,8 @@ const app = {
       withoutAnimation: false
     },
     device: 'desktop',
-    language: Cookies.get('language') || 'en'
+    globalUrl: 'http://localhost/blog/Api/public/index.php/',
+    language: Cookies.get('language') || 'zh'
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {

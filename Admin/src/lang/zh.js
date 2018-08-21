@@ -1,6 +1,10 @@
 export default {
   route: {
     dashboard: '首页',
+    adminset: '管理员设置',
+    articlemanage: '文章管理',
+    articlelist: '文章列表',
+    articleadd: '添加文章',
     introduction: '简述',
     documentation: '文档',
     guide: '引导页',

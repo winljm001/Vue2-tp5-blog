@@ -39,6 +39,39 @@ export const constantRouterMap = [
       name: 'dashboard',
       meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
     }]
+  },
+  {
+    path: '',
+    component: Layout,
+    redirect: 'adminset',
+    children: [{
+      path: 'adminset',
+      component: () => import('@/views/adminset/index'),
+      name: 'adminset',
+      meta: { title: 'adminset', icon: 'user', noCache: true }
+    }]
+  },
+  {
+    path: '',
+    component: Layout,
+    redirect: 'articlelist',
+    name: 'articlemanage',
+    meta: {
+      title: 'articlemanage',
+      icon: 'form'
+    },
+    children: [{
+      path: 'articlelist',
+      component: () => import('@/views/articleset/index'),
+      name: 'articlelist',
+      meta: { title: 'articlelist', icon: 'list', noCache: true }
+    },
+    {
+      path: 'articleadd',
+      component: () => import('@/views/articleset/add'),
+      name: 'articleadd',
+      meta: { title: 'articleadd', icon: 'edit', noCache: true }
+    }]
   }
 ]
 

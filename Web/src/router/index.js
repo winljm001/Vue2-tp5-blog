@@ -29,10 +29,10 @@ export default new Router({
           meta: { title: "article", icon: "dashboard" }
         },
         {
-          path: "/note",
-          component: () => import("@/views/note/index"),
-          name: "note",
-          meta: { title: "note", icon: "dashboard" }
+          path: "/bless",
+          component: () => import("@/views/bless/index"),
+          name: "bless",
+          meta: { title: "bless", icon: "dashboard" }
         },
         {
           path: "/resource",

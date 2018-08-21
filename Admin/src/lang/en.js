@@ -1,6 +1,10 @@
 export default {
   route: {
     dashboard: 'Dashboard',
+    adminset: 'Adminset',
+    articlemanage: 'Articlemanage',
+    articlelist: 'Articlelist',
+    articleadd: 'Articleadd',
     introduction: 'Introduction',
     documentation: 'Documentation',
     guide: 'Guide',

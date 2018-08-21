@@ -37,6 +37,24 @@ Route::group('admin', function () use ($afterBehavior) {
         ]
     ]);
     //大部分控制器的路由都以分组的形式写到这里
+    Route::group('Article', [
+        'index'        => [
+            'admin/Article/index',
+            ['method' => 'post']
+        ],
+        'add'          => [
+            'admin/Article/add',
+            ['method' => 'post']
+        ],
+        'edit'         => [
+            'admin/Article/edit',
+            ['method' => 'post']
+        ],
+        'del'          => [
+            'admin/Article/del',
+            ['method' => 'post']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
     Route::group('Menu', [
         'index'        => [
             'admin/Menu/index',
@@ -57,6 +75,16 @@ Route::group('admin', function () use ($afterBehavior) {
         'del'          => [
             'admin/Menu/del',
             ['method' => 'get']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
+    Route::group('Admin', [
+        'getAdmin'          => [
+            'admin/Admin/getAdmin',
+            ['method' => 'post']
+        ],
+        'setAdmin'          => [
+            'admin/Admin/setAdmin',
+            ['method' => 'post']
         ]
     ], ['after_behavior' => $afterBehavior]);
     Route::group('User', [
@@ -87,7 +115,7 @@ Route::group('admin', function () use ($afterBehavior) {
         'del'          => [
             'admin/User/del',
             ['method' => 'get']
-        ],
+        ]
     ], ['after_behavior' => $afterBehavior]);
     Route::group('Auth', [
         'index'        => [
