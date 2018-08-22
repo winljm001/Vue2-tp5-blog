@@ -1,16 +1,24 @@
 import request from '@/utils/request'
 
-export function articleList(query) {
+export function articleList(data) {
   return request({
-    url: '/article/list',
-    method: 'get',
-    params: query
+    url: 'admin/Article/index',
+    method: 'post',
+    data
   })
 }
 
 export function addArticle(data) {
   return request({
     url: 'admin/Article/add',
+    method: 'post',
+    data
+  })
+}
+
+export function delArticle(data) {
+  return request({
+    url: 'admin/Article/del',
     method: 'post',
     data
   })

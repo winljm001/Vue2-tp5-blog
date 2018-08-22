@@ -9,6 +9,7 @@
         <el-date-picker
           v-model="form.addtime"
           type="date"
+          default-time="form.addtime"
           placeholder="选择日期">
         </el-date-picker>
       </el-form-item>
@@ -55,6 +56,7 @@
 import { timeToTimestamp, dateToTime } from '@/utils/index'
 import Tinymce from '@/components/Tinymce'
 import { addArticle } from '@/api/article'
+const nowTime = new Date()
 export default {
   components: { Tinymce },
   name: 'articleSet',
@@ -63,15 +65,18 @@ export default {
       form: {
         author: 'winljm001',
         sort: '0',
-        mainimg: [
-          { url: '' }
-        ]
+        addtime: nowTime,
+        mainimg: [],
+        content: ''
       },
       uploadUrl: this.$store.state.app.globalUrl + 'admin/Index/upload'
     }
   },
   methods: {
     onSubmit() {
+      if (this.form.mainimg.length === 0) {
+        this.form.mainimg.push({ url: '' })
+      }
       const saveObj = {
         title: this.form.title,
         addtime: timeToTimestamp(dateToTime(this.form.addtime, 'yyyy-MM-dd HH:mm:ss')),
@@ -79,6 +84,7 @@ export default {
         author: this.form.author,
         abstract: this.form.abstract,
         sort: this.form.sort,
+        watchnum: this.form.watchnum,
         mainimg: this.form.mainimg[0].url,
         content: this.form.content
       }
@@ -88,6 +94,13 @@ export default {
             message: '添加成功',
             type: 'success'
           })
+          this.form = {
+            author: 'winljm001',
+            sort: '0',
+            mainimg: [],
+            addtime: nowTime,
+            content: ''
+          }
         } else {
           this.$message.error('添加失败！')
         }

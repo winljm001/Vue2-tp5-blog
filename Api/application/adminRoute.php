@@ -53,6 +53,10 @@ Route::group('admin', function () use ($afterBehavior) {
         'del'          => [
             'admin/Article/del',
             ['method' => 'post']
+        ],
+        'detail'          => [
+            'admin/Article/detail',
+            ['method' => 'post']
         ]
     ], ['after_behavior' => $afterBehavior]);
     Route::group('Menu', [
