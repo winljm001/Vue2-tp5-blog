@@ -26,7 +26,7 @@
       <el-table-column min-width="150px" :label="$t('table.title')">
         <template slot-scope="scope">
           <span class="link-type">{{scope.row.title}}</span>
-          <el-tag>{{scope.row.typeName}}</el-tag>
+          <el-tag style="margin-right: 12px" v-for="v in scope.row.tags">{{v.name}}</el-tag>
         </template>
       </el-table-column>
       <el-table-column width="150px" align="center" :label="$t('table.date')">
@@ -51,7 +51,7 @@
       </el-table-column>
       <el-table-column align="center" :label="$t('table.actions')" width="230" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">{{$t('table.edit')}}</el-button>
+          <el-button type="primary" size="mini" @click="handleJumpEdit(scope.row.Id)">{{$t('table.edit')}}</el-button>
           <el-button  size="mini" type="danger" @click="handleDelete(scope.row,scope.row.Id)">{{$t('table.delete')}}
           </el-button>
         </template>
@@ -110,6 +110,10 @@ export default {
           this.listLoading = false
           console.log(response.data)
           this.list = response.data.data.list
+          const that = this
+          this.list.forEach((v) => {
+            v.tags = JSON.parse(v.tags)
+          })
           this.total = response.data.data.count
         }
       }).catch(error => {
@@ -128,34 +132,33 @@ export default {
       this.listQuery.page = val
       this.getList()
     },
-    handleModifyStatus(row, status) {
-      this.$message({
-        message: '操作成功',
-        type: 'success'
-      })
-      row.status = status
+    handleJumpEdit(id) {
+      this.$router.push({ name: 'articleedit', query: { id: id }})
     },
 
     handleDelete(row, id) {
-      delArticle({ id: id }).then(response => {
-        if (response.data.msg === '操作成功') {
-          this.$notify({
-            title: '成功',
-            message: '删除成功',
-            type: 'success',
-            duration: 2000
+      this.$confirm('确认删除？')
+        .then(_ => {
+          delArticle({ id: id }).then(response => {
+            if (response.data.msg === '操作成功') {
+              this.$notify({
+                title: '成功',
+                message: '删除成功',
+                type: 'success',
+                duration: 2000
+              })
+              const index = this.list.indexOf(row)
+              this.list.splice(index, 1)
+            } else {
+              this.$notify.error({
+                title: '错误',
+                message: '删除失败'
+              })
+            }
+          }).catch(error => {
+            console.log(error)
           })
-          const index = this.list.indexOf(row)
-          this.list.splice(index, 1)
-        } else {
-          this.$notify.error({
-            title: '错误',
-            message: '删除失败'
-          })
-        }
-      }).catch(error => {
-        console.log(error)
-      })
+        })
     }
 
   }

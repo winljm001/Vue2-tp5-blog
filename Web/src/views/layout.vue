@@ -21,8 +21,22 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+    this.getBlogInfo();
+  },
+  methods: {
+    getBlogInfo() {
+      let that = this;
+      this.axios({
+        method: "post",
+        url: "admin/home/getAdmin",
+        data: { uid: 1 }
+      }).then(function(res) {
+        this.$store.state.blogInfo = res.data.data.admin;
+        console.log(res.data);
+      });
+    }
+  }
 };
 </script>
 <style scoped>

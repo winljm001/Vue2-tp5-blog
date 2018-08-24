@@ -38,10 +38,6 @@ Route::group('admin', function () use ($afterBehavior) {
     ]);
     //大部分控制器的路由都以分组的形式写到这里
     Route::group('Article', [
-        'index'        => [
-            'admin/Article/index',
-            ['method' => 'post']
-        ],
         'add'          => [
             'admin/Article/add',
             ['method' => 'post']
@@ -53,12 +49,80 @@ Route::group('admin', function () use ($afterBehavior) {
         'del'          => [
             'admin/Article/del',
             ['method' => 'post']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
+    Route::group('ArticleTag', [
+        'add'          => [
+            'admin/ArticleTag/add',
+            ['method' => 'post']
         ],
-        'detail'          => [
-            'admin/Article/detail',
+        'edit'         => [
+            'admin/ArticleTag/edit',
+            ['method' => 'post']
+        ],
+        'del'          => [
+            'admin/ArticleTag/del',
             ['method' => 'post']
         ]
     ], ['after_behavior' => $afterBehavior]);
+    Route::group('ArticleTag', [
+        'add'          => [
+            'admin/ArticleTag/add',
+            ['method' => 'post']
+        ],
+        'edit'         => [
+            'admin/ArticleTag/edit',
+            ['method' => 'post']
+        ],
+        'del'          => [
+            'admin/ArticleTag/del',
+            ['method' => 'post']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
+    Route::group('ArticleType', [
+        'add'          => [
+            'admin/ArticleType/add',
+            ['method' => 'post']
+        ],
+        'edit'         => [
+            'admin/ArticleType/edit',
+            ['method' => 'post']
+        ],
+        'del'          => [
+            'admin/ArticleType/del',
+            ['method' => 'post']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
+    Route::group('home', [
+        'getAdmin'          => [
+            'admin/Admin/getAdmin',
+            ['method' => 'post']
+        ],
+        'ArticleList'        => [
+            'admin/Article/index',
+            ['method' => 'post']
+        ],
+        'ArticleDetail'          => [
+            'admin/Article/detail',
+            ['method' => 'post']
+        ],
+        'ArticleTypeList'        => [
+            'admin/ArticleType/index',
+            ['method' => 'post']
+        ],
+        'ArticleTypeDetail'          => [
+            'admin/ArticleType/detail',
+            ['method' => 'post']
+        ],
+        'ArticleTagList'        => [
+            'admin/ArticleTag/index',
+            ['method' => 'post']
+        ],
+        'ArticleTagdetail'          => [
+            'admin/ArticleTag/detail',
+            ['method' => 'post']
+        ]
+    ]);
     Route::group('Menu', [
         'index'        => [
             'admin/Menu/index',
@@ -82,10 +146,6 @@ Route::group('admin', function () use ($afterBehavior) {
         ]
     ], ['after_behavior' => $afterBehavior]);
     Route::group('Admin', [
-        'getAdmin'          => [
-            'admin/Admin/getAdmin',
-            ['method' => 'post']
-        ],
         'setAdmin'          => [
             'admin/Admin/setAdmin',
             ['method' => 'post']

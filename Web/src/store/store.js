@@ -28,7 +28,8 @@ const store = new Vuex.Store({
         navName: "关于作者",
         url: "/author"
       }
-    ]
+    ],
+    blogInfo: {}
   },
   getters: {
     // this.$store.getters.comingMovieList

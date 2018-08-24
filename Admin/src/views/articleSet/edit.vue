@@ -55,7 +55,7 @@
         <tinymce :height="300" v-model="form.content"></tinymce>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit" class="save-btn">添加</el-button>
+        <el-button type="primary" @click="onSubmit" class="save-btn">保存</el-button>
       </el-form-item>
     </el-form>
     </el-card>
@@ -79,25 +79,17 @@
 <script>
 import { timeToTimestamp, dateToTime } from '@/utils/index'
 import Tinymce from '@/components/Tinymce'
-import { addArticle, articleTypeList, articleTagList } from '@/api/article'
-const nowTime = new Date()
+import { articleDetail, updateArticle, articleTypeList, articleTagList } from '@/api/article'
 export default {
   components: { Tinymce },
-  name: 'articleSet',
+  name: 'articleEdit',
   data() {
     return {
-      tagDialogVisible: false,
-      form: {
-        author: 'winljm001',
-        sort: '0',
-        addtime: nowTime,
-        mainimg: [],
-        content: '',
-        tag: []
-      },
+      form: {},
       typeList: [],
       tagList: [],
       multipleSelection: [],
+      tagDialogVisible: false,
       uploadUrl: this.$store.state.app.globalUrl + 'admin/Index/upload'
     }
   },
@@ -107,6 +99,7 @@ export default {
         this.form.mainimg.push({ url: '' })
       }
       const saveObj = {
+        Id: this.form.id,
         title: this.form.title,
         addtime: timeToTimestamp(dateToTime(this.form.addtime, 'yyyy-MM-dd HH:mm:ss')),
         from: this.form.from,
@@ -119,21 +112,14 @@ export default {
         mainimg: this.form.mainimg[0].url,
         content: this.form.content
       }
-      addArticle(saveObj).then(response => {
+      updateArticle(saveObj).then(response => {
         if (response.data.msg === '操作成功') {
           this.$message({
-            message: '添加成功',
+            message: '保存成功',
             type: 'success'
           })
-          this.form = {
-            author: 'winljm001',
-            sort: '0',
-            mainimg: [],
-            addtime: nowTime,
-            content: ''
-          }
         } else {
-          this.$message.error('添加失败！')
+          this.$message.error('保存失败！')
         }
       }).catch(error => {
         console.log(error)
@@ -186,6 +172,29 @@ export default {
   mounted() {
     this.getTypeList()
     this.getTagList()
+    articleDetail({ id: this.$route.query.id }).then(response => {
+      if (response.data.msg === '操作成功') {
+        const article = response.data.data.article
+        this.form = {
+          id: article.Id,
+          title: article.title,
+          addtime: new Date(article.addtime * 1000),
+          from: article.from,
+          type: article.type,
+          tag: JSON.parse(article.tags),
+          author: article.author,
+          abstract: article.abstract,
+          sort: article.sort,
+          watchnum: article.watchnum,
+          mainimg: [{ url: article.mainimg }],
+          content: article.content
+        }
+      } else {
+        this.$message.error('获取文章失败')
+      }
+    }).catch(error => {
+      console.log(error)
+    })
   },
   destroyed() {
     // window.removeEventListener('hashchange', this.afterQRScan)

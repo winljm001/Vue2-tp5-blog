@@ -1,6 +1,6 @@
 <?php
 /**
- * 文章管理
+ * 文章标签管理
  * @since   2018-08-22
  * @author  Mr li <winljm001@qq.com>
  */
@@ -8,20 +8,19 @@
 namespace app\admin\controller;
 
 
-use app\model\AdminArticle;
+use app\model\AdminArticleType;
 use app\util\ReturnCode;
 use app\util\Tools;
 
-class Article extends Base {
+class ArticleType extends Base {
     /**
-     * 新增文章
+     * 新增文章类型
      * @return array
      * @author  winljm001 <winljm001@126.com>
      */
     public function add() {
         $postData = $this->request->post();
-        $postData['updatetime'] = time();
-        $res = AdminArticle::create($postData);
+        $res = AdminArticleType::create($postData);
         if ($res === false) {
             return $this->buildFailed(ReturnCode::DB_SAVE_ERROR, '操作失败');
         } else {
@@ -30,7 +29,7 @@ class Article extends Base {
     }
 
     /**
-     * 获取文章列表
+     * 获取文章类型列表
      * @return array
      * @throws \think\exception\DbException
      * @author  winljm001 <winljm001@126.com>
@@ -40,22 +39,14 @@ class Article extends Base {
         $limit = $this->request->post('size', config('apiAdmin.ADMIN_LIST_DEFAULT'));
         $start = $this->request->post('page', 1);
         $keywords = $this->request->post('keywords', '');
-        $type = $this->request->post('type', '');
-        $status = $this->request->post('status', '');
 
         $where = [];
-        if ($status === '1' || $status === '0') {
-            $where['status'] = $status;
-        }
-        if ($type!='') {
-            $where['type'] = $type;
-        }
         
         if($keywords!=''){
-            $where=array_merge($where,['id|title'=>['like', "%{$keywords}%"]]);
+            $where=array_merge($where,['id|name'=>['like', "%{$keywords}%"]]);
         }
 
-        $listObj = (new AdminArticle())->where($where)->order('updateTime DESC')
+        $listObj = (new AdminArticleType())->where($where)->order('id DESC')
             ->paginate($limit, false, ['page' => $start])->toArray();
         $listInfo = $listObj['data'];
         return $this->buildSuccess([
@@ -65,7 +56,7 @@ class Article extends Base {
     }
 
     /**
-     * 删除文章
+     * 删除文章类型
      * @return array
      * @author winljm001 <winljm001@126.com>
      */
@@ -74,12 +65,12 @@ class Article extends Base {
         if (!$id) {
             return $this->buildFailed(ReturnCode::EMPTY_PARAMS, '缺少必要参数');
         }
-        AdminArticle::destroy($id);
+        AdminArticleType::destroy($id);
         return $this->buildSuccess([]);
     }
 
     /**
-     * 获取文章
+     * 获取文章类型
      * @return object
      * @author winljm001 <winljm001@126.com>
      */
@@ -88,22 +79,21 @@ class Article extends Base {
         if (!$id) {
             return $this->buildFailed(ReturnCode::EMPTY_PARAMS, '缺少必要参数');
         }
-        $data = AdminArticle::get(['id' => $id]);
+        $data = AdminArticleType::get(['id' => $id]);
         return $this->buildSuccess([
-            'article'  => $data
+            'articleTag'  => $data
         ]);
     }
 
     /**
-     * 编辑文章
+     * 编辑文章类型
      * @author winljm001 <winljm001@126.com>
      * @return array
      * @throws \think\exception\DbException
      */
     public function edit() {
         $postData = $this->request->post();
-        $postData['updatetime'] = time();
-        $res = AdminArticle::update($postData);
+        $res = AdminArticleType::update($postData);
         if ($res === false) {
             return $this->buildFailed(ReturnCode::DB_SAVE_ERROR, '操作失败');
         } else {

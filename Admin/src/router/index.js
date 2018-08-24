@@ -37,7 +37,7 @@ export const constantRouterMap = [
       path: 'dashboard',
       component: () => import('@/views/dashboard/index'),
       name: 'dashboard',
-      meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
+      meta: { title: 'dashboard', icon: 'index', noCache: true }
     }]
   },
   {
@@ -71,6 +71,25 @@ export const constantRouterMap = [
       component: () => import('@/views/articleset/add'),
       name: 'articleadd',
       meta: { title: 'articleadd', icon: 'edit', noCache: true }
+    },
+    {
+      path: 'articleedit',
+      component: () => import('@/views/articleset/edit'),
+      name: 'articleedit',
+      meta: { title: 'articleedit', icon: 'edit', noCache: true },
+      hidden: true
+    },
+    {
+      path: 'articletag',
+      component: () => import('@/views/articleset/tag'),
+      name: 'articletag',
+      meta: { title: 'articletag', icon: 'tab', noCache: true }
+    },
+    {
+      path: 'articletype',
+      component: () => import('@/views/articleset/type'),
+      name: 'articletype',
+      meta: { title: 'articletype', icon: 'type', noCache: true }
     }]
   }
 ]
