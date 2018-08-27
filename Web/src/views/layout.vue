@@ -1,7 +1,9 @@
 <template>
   <div class="main">
   	<Header></Header>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   	<Footer></Footer>
   	<ScrollTop></ScrollTop>
   </div>

@@ -2,6 +2,7 @@
   <div class="index">
     <div class="recently-list">
       <ArticleItem v-for="v in recentlyData" :key="v.id" :article-data="v"></ArticleItem>
+      <div v-if="recentlyData.length<=0" class="no-data">没有文章哦</div>
       <button class="loading-more-btn" @click="loadMore">加载更多</button>
     </div>
     <div class="side-content">
@@ -98,5 +99,15 @@ export default {
   &:hover {
     box-shadow: 0px 3px 6px 0px #fff;
   }
+}
+.recently-list {
+  flex-grow: 1;
+}
+.no-data {
+  background-color: #fff;
+  padding: 16px 20px;
+  border-bottom: 1px solid #dededd;
+  position: relative;
+  text-align: center;
 }
 </style>
