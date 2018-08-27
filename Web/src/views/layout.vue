@@ -32,8 +32,7 @@ export default {
         url: "admin/home/getAdmin",
         data: { uid: 1 }
       }).then(function(res) {
-        this.$store.state.blogInfo = res.data.data.admin;
-        console.log(res.data);
+        that.$store.state.blogInfo = res.data.data.admin;
       });
     }
   }

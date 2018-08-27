@@ -34,7 +34,6 @@ export default {
         url: "admin/home/ArticleTagList",
         data: {}
       }).then(function(res) {
-        console.log(res.data.list);
         that.hotTag = res.data.data.list;
       });
     }

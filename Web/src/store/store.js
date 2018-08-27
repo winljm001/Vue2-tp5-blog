@@ -50,9 +50,7 @@ const store = new Vuex.Store({
         var start = state.comingMovieList.length;
         Vue.prototype.axios
           .get("/movie/coming_soon?count=10&start=" + start)
-          .then(function(response) {
-            console.log(1);
-          })
+          .then(function(response) {})
           .catch(function(error) {
             console.log(error);
           });

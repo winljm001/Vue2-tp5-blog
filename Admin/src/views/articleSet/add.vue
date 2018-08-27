@@ -23,7 +23,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="标签">
-        <el-tag v-for="v in form.tag" style="margin-right: 12px;">{{v.name}}</el-tag>
+        <el-tag v-for="v in form.tag" style="margin-right: 12px;" :key="v.Id">{{v.name}}</el-tag>
         <el-button size="small" type="primary" @click="selectTag">选择分类</el-button>
       </el-form-item>
       <el-form-item label="简介">

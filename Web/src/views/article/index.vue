@@ -1,7 +1,8 @@
 <template>
   <div class="article">
     <div class="recently-list">
-      <ArticleItem v-for="v in recentlyData" :key="v.id" :article-data="v"></ArticleItem>
+      <ArticleItem v-for="v in recentlyData" :key="v.Id" :article-data="v"></ArticleItem>
+      <div v-if="recentlyData.length<=0" class="no-data">没有文章哦</div>
       <button class="loading-more-btn" @click="loadMore">加载更多</button>
     </div>
     <div class="side-content">
@@ -9,7 +10,7 @@
         <h3>文章分类<i class="dot fa fa-circle-o-notch fa-spin"></i></h3>
         <div>
           	<ul class="type-list" @mouseleave="activeClassIndex=aCurrentTypeIndex">
-          		<li v-for="(v,i) in typeList" :key="v.id" @mouseenter="moveActive(i)" @click="changeType(v.id)">{{v.title}}</li>
+          		<li v-for="(v,i) in typeList" :key="v.Id" @mouseenter="moveActive(i)" @click="changeType(v.Id)">{{v.name}}</li>
           		<li class="active" :style="{top:activeClassIndex*44+'px'}"></li>
           	</ul>
         </div>
@@ -35,56 +36,8 @@ export default {
   },
   data() {
     return {
-      recentlyData: [
-        {
-          id: "1",
-          title: "题目",
-          author: "Mr li",
-          typeName: "前端",
-          tagList: ["Audio", "nodejs", "css"],
-          time: "2018年7月30日",
-          mainImg:
-            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2771861135,3895685363&fm=27&gp=0.jpg",
-          introduce:
-            "正则表达式（英语：Regular Expression，在代码中常简写为regex、regexp或RE）使用单个字符串来描述、匹配一系列符合某个句法规则的字符串搜索模式。",
-          watchNum: "12",
-          commentNum: "3"
-        },
-        {
-          id: "2",
-          title: "题目1",
-          author: "Mr li",
-          typeName: "前端",
-          tagList: ["nodejs", "css"],
-          time: "2018年7月30日",
-          mainImg:
-            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2771861135,3895685363&fm=27&gp=0.jpg",
-          introduce:
-            "正则表达式（英语：Regular Expression，在代码中常简写为regex、regexp或RE）使用单个字符串来描述、匹配一系列符合某个句法规则的字符串搜索模式。",
-          watchNum: "12",
-          commentNum: "3"
-        },
-        {
-          id: "3",
-          title: "题目3",
-          author: "Mr li",
-          typeName: "前端",
-          tagList: ["Audio", "nodejs"],
-          time: "2018年7月30日",
-          mainImg:
-            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2771861135,3895685363&fm=27&gp=0.jpg",
-          introduce:
-            "正则表达式（英语：Regular Expression，在代码中常简写为regex、regexp或RE）使用单个字符串来描述、匹配一系列符合某个句法规则的字符串搜索模式。",
-          watchNum: "12",
-          commentNum: "3"
-        }
-      ],
-      typeList: [
-        { id: "1", title: "css" },
-        { id: "3", title: "html" },
-        { id: "5", title: "js" },
-        { id: "7", title: "php" }
-      ],
+      recentlyData: [],
+      typeList: [],
       // 分类背景索引位置
       activeClassIndex: 0,
       aCurrentType: 0
@@ -94,17 +47,15 @@ export default {
     aCurrentTypeIndex() {
       let that = this;
       let i = this.typeList.findIndex(function(value, index, arr) {
-        return that.aCurrentType === value.id;
+        return that.aCurrentType === value.Id;
       });
       return i === -1 ? 0 : i;
     }
   },
   mounted() {
-    this.aCurrentType = this.$route.query.type
-      ? this.$route.query.type
-      : this.typeList[0].id;
     this.activeClassIndex = this.aCurrentTypeIndex;
     this.getData();
+    this.getArticleType();
   },
   watch: {
     $route(to, from) {
@@ -124,7 +75,27 @@ export default {
       this.$router.push({ name: "article", query: { type: i } });
     },
     getData() {
-      console.log(this.aCurrentType);
+      let that = this;
+      this.axios({
+        method: "post",
+        url: "admin/home/ArticleList",
+        data: { type: this.$route.query.type }
+      }).then(function(res) {
+        that.recentlyData = res.data.data.list;
+        // console.log(res.data.data.list);
+      });
+    },
+    getArticleType() {
+      let that = this;
+      this.axios({
+        method: "post",
+        url: "admin/home/ArticleTypeList"
+      }).then(function(res) {
+        that.typeList = res.data.data.list;
+        that.aCurrentType = that.$route.query.type
+          ? that.$route.query.type
+          : that.typeList[0].Id;
+      });
     }
   }
 };
@@ -196,5 +167,15 @@ export default {
       transition: all 0.3s;
     }
   }
+}
+.recently-list {
+  flex-grow: 1;
+}
+.no-data {
+  background-color: #fff;
+  padding: 16px 20px;
+  border-bottom: 1px solid #dededd;
+  position: relative;
+  text-align: center;
 }
 </style>

@@ -26,7 +26,7 @@
       <el-table-column min-width="150px" :label="$t('table.title')">
         <template slot-scope="scope">
           <span class="link-type">{{scope.row.title}}</span>
-          <el-tag style="margin-right: 12px" v-for="v in scope.row.tags">{{v.name}}</el-tag>
+          <el-tag style="margin-right: 12px" v-for="v in scope.row.tags" :key="v.Id">{{v.name}}</el-tag>
         </template>
       </el-table-column>
       <el-table-column width="150px" align="center" :label="$t('table.date')">
@@ -110,7 +110,6 @@ export default {
           this.listLoading = false
           console.log(response.data)
           this.list = response.data.data.list
-          const that = this
           this.list.forEach((v) => {
             v.tags = JSON.parse(v.tags)
           })

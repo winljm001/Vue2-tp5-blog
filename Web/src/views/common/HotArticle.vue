@@ -10,30 +10,25 @@ export default {
   components: {},
   data() {
     return {
-      hotList: [
-        {
-          id: "1",
-          title: "JavaScript1231231234sdd的的地方覆盖个34435",
-          hotNum: "120"
-        },
-        { id: "2", title: "JavaScript1", hotNum: "120" },
-        { id: "3", title: "JavaScript2方覆盖个454556576878", hotNum: "120" },
-        { id: "4", title: "JavaScript3", hotNum: "120" },
-        { id: "5", title: "JavaScript4", hotNum: "120" },
-        {
-          id: "6",
-          title: "JavaScrip方覆盖个方覆盖个方覆盖个t50------------6777",
-          hotNum: "120"
-        },
-        { id: "7", title: "JavaScript6", hotNum: "120" },
-        { id: "8", title: "JavaScript7", hotNum: "120" }
-      ]
+      hotList: []
     };
   },
-  mounted() {},
+  mounted() {
+    this.getHotArticle();
+  },
   methods: {
     jumpDetail(id) {
       console.log(id);
+    },
+    getHotArticle() {
+      let that = this;
+      this.axios({
+        method: "post",
+        url: "admin/home/ArticleList",
+        data: { order: "watchnum" }
+      }).then(function(res) {
+        that.hotList = res.data.data.list;
+      });
     }
   }
 };

@@ -10,7 +10,7 @@ export function setAdmin(data) {
 
 export function getAdmin(uid) {
   return request({
-    url: 'admin/Admin/getAdmin',
+    url: 'admin/home/getAdmin',
     method: 'post',
     data: { uid: uid }
   })

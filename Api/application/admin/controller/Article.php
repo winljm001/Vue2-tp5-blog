@@ -42,6 +42,7 @@ class Article extends Base {
         $keywords = $this->request->post('keywords', '');
         $type = $this->request->post('type', '');
         $status = $this->request->post('status', '');
+        $order = $this->request->post('order', 'updateTime');
 
         $where = [];
         if ($status === '1' || $status === '0') {
@@ -55,7 +56,7 @@ class Article extends Base {
             $where=array_merge($where,['id|title'=>['like', "%{$keywords}%"]]);
         }
 
-        $listObj = (new AdminArticle())->where($where)->order('updateTime DESC')
+        $listObj = (new AdminArticle())->where($where)->order($order.' DESC')
             ->paginate($limit, false, ['page' => $start])->toArray();
         $listInfo = $listObj['data'];
         return $this->buildSuccess([

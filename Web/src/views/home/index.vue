@@ -34,56 +34,26 @@ export default {
   },
   data() {
     return {
-      recentlyData: [
-        {
-          id: "1",
-          title: "题目",
-          author: "Mr li",
-          typeName: "前端",
-          tagList: ["Audio", "nodejs", "css"],
-          time: "2018年7月30日",
-          mainImg:
-            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2771861135,3895685363&fm=27&gp=0.jpg",
-          introduce:
-            "正则表达式（英语：Regular Expression，在代码中常简写为regex、regexp或RE）使用单个字符串来描述、匹配一系列符合某个句法规则的字符串搜索模式。",
-          watchNum: "12",
-          commentNum: "3"
-        },
-        {
-          id: "2",
-          title: "题目1",
-          author: "Mr li",
-          typeName: "前端",
-          tagList: ["nodejs", "css"],
-          time: "2018年7月30日",
-          mainImg:
-            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2771861135,3895685363&fm=27&gp=0.jpg",
-          introduce:
-            "正则表达式（英语：Regular Expression，在代码中常简写为regex、regexp或RE）使用单个字符串来描述、匹配一系列符合某个句法规则的字符串搜索模式。",
-          watchNum: "12",
-          commentNum: "3"
-        },
-        {
-          id: "3",
-          title: "题目3",
-          author: "Mr li",
-          typeName: "前端",
-          tagList: ["Audio", "nodejs"],
-          time: "2018年7月30日",
-          mainImg:
-            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2771861135,3895685363&fm=27&gp=0.jpg",
-          introduce:
-            "正则表达式（英语：Regular Expression，在代码中常简写为regex、regexp或RE）使用单个字符串来描述、匹配一系列符合某个句法规则的字符串搜索模式。",
-          watchNum: "12",
-          commentNum: "3"
-        }
-      ]
+      recentlyData: []
     };
   },
-  mounted() {},
+  mounted() {
+    this.getData();
+  },
   methods: {
     loadMore() {
       console.log("加载更多");
+    },
+    getData() {
+      let that = this;
+      this.axios({
+        method: "post",
+        url: "admin/home/ArticleList",
+        data: {}
+      }).then(function(res) {
+        that.recentlyData = res.data.data.list;
+        // console.log(res.data.data.list);
+      });
     }
   }
 };

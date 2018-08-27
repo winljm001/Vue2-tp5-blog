@@ -5,19 +5,19 @@
   			<dl class="web-info">
   				<dt>关于本站</dt>
   				<dd>程序：Mr li博客</dd>
-  				<dd>作者：Mr li</dd>
-  				<dd>技术栈：vue全家桶，element-ui，tp5</dd>
+  				<dd>作者：{{blogInfo.nickname}}</dd>
+  				<dd>技术栈：{{blogInfo.technology}}</dd>
   			</dl>
   			<dl class="web-info">
   				<dt>关于作者</dt>
-  				<dd>昵称：Mr li</dd>
-  				<dd>邮箱：winljm001@qq.com</dd>
+  				<dd>昵称：{{blogInfo.nickname}}</dd>
+  				<dd>邮箱：{{blogInfo.email}}</dd>
   				<dd>领域：全栈漫漫长路发展ing</dd>
   			</dl>
   		</div>
   		<div class="footer-tip">
-  			<span>© 2015 - 2018 Mr li & 版权所有 </span>
-  			<span>渝ICP备17006757号</span>
+  			<span>© 2015 - 2018 {{blogInfo.nickname}} & 版权所有 </span>
+  			<span>{{blogInfo.reference}}</span>
   		</div>
   	</div>
     
@@ -30,6 +30,11 @@ export default {
   components: {},
   data() {
     return {};
+  },
+  computed: {
+    blogInfo: function() {
+      return this.$store.state.blogInfo;
+    }
   },
   mounted() {},
   methods: {}

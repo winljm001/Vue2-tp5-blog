@@ -3,7 +3,7 @@
   	<div class="header-wrap">
       <!-- logo -->
   		<router-link to="/" class="header-logo">
-  			<img src="../../assets/img/logo.png">
+  			<img :src="blogInfo.logo">
   		</router-link>
       <!-- 菜单 -->
       <transition :name="transitionName">
@@ -57,6 +57,9 @@ export default {
   computed: {
     menuData: function() {
       return this.$store.state.menuData;
+    },
+    blogInfo: function() {
+      return this.$store.state.blogInfo;
     }
   },
   mounted() {
